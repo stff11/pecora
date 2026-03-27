@@ -20,6 +20,7 @@ body {
 }
 
 /* ── NAV ── */
+.menu-toggle { display: none; }
 nav {
   position: sticky; top: 0; z-index: 90;
   background: rgba(26,16,8,.96);
@@ -33,6 +34,7 @@ nav {
 .nav-links { display: flex; gap: 2rem; list-style: none; }
 .nav-links a { color: var(--crema); text-decoration: none; font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; opacity: .8; transition: opacity .2s, color .2s; }
 .nav-links a:hover { opacity: 1; color: var(--oro); }
+a.admin { color: var(--oro); opacity: 1; }
 
 /* ── HERO ── */
 #hero {
@@ -109,13 +111,14 @@ section { padding: 6rem 2rem; }
 
 /* ── ORARI ── */
 #orari { background: var(--bianco); }
-.orari-table { width: 100%; border-collapse: collapse; margin-top: 3rem; font-size: .92rem; }
+.orari-table { min-width: 400px; width: 100%; border-collapse: collapse; margin-top: 3rem; font-size: .92rem; }
 .orari-table th { background: var(--nero); color: var(--oro); font-family: 'Cormorant Garamond', serif; font-size: 1rem; letter-spacing: .1em; padding: 1rem 1.5rem; text-align: left; }
 .orari-table td { padding: 1rem 1.5rem; border-bottom: 1px solid rgba(201,168,76,.15); color: var(--grigio); }
 .orari-table tr:nth-child(even) td { background: var(--crema); }
 .orari-table td:first-child { font-family: 'Playfair Display', serif; font-size: 1rem; color: var(--nero); font-weight: 700; }
 .giorno-chiuso td { opacity: .45; font-style: italic; }
 .highlight-row td { background: rgba(201,168,76,.08) !important; }
+.riservato {margin-top: '1.5rem'; font-size: '.82rem'; color: 'var(--grigio)';}
 
 /* ── DOVE ── */
 #dove { background: var(--crema); }
@@ -181,9 +184,82 @@ footer a:hover { opacity: 1; }
 .login-box h1 { font-family: 'Playfair Display', serif; color: var(--oro); font-size: 1.8rem; margin-bottom: .5rem; }
 .login-box p { color: rgba(245,237,224,.4); font-size: .85rem; margin-bottom: 2rem; }
 
+/* Hide the break on large screens */
+.mobile-break {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  /* Show the break, forcing the text to the next line */
+  .mobile-break {
+    display: block;
+    content: ""; /* Ensures it acts like a block element */
+    margin-top: 0.2rem; /* Optional: adds a tiny bit of space between lines */
+  }
+}
+
 @media (max-width: 768px) {
   .danza-grid, .dove-grid, .conv-grid { grid-template-columns: 1fr; }
   nav { padding: .8rem 1.2rem; }
-  .nav-links { display: none; }
   .ann-actions { flex-direction: column; }
-}
+
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    color: var(--oro);
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+
+  .nav-links {
+    display: none; /* Keep hidden by default */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(26,16,8,.98);
+    padding: 2rem;
+    gap: 1.5rem;
+    border-bottom: 1px solid var(--oro);
+  }
+
+  .nav-links.active {
+    display: flex; /* Show when 'active' class is added */
+  }
+
+    /* 1. Remove padding from the section to give the table full width */
+    #orari {
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    /* 2. Keep the title/label aligned with the rest of the site */
+    #orari .section-label, 
+    #orari .section-title,
+    #orari .section-inner > p {
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  
+    /* 3. Optimize the table for tight spaces */
+    .orari-table {
+      font-size: 0.82rem; /* Slightly smaller text */
+      min-width: 100%;    /* Kill the min-width we added earlier! */
+    }
+  
+    .orari-table th, 
+    .orari-table td {
+      padding: 0.8rem 0.6rem; /* Tighter padding inside cells */
+    }
+
+    .orari-table td {
+      word-break: break-word; /* Prevents long words from pushing the layout */
+    }
+  
+    /* 4. Let the 'Attività' column take the most space */
+    .orari-table td:nth-child(2) {
+      width: 50%; 
+    }
+  }

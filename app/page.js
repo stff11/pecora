@@ -1,22 +1,36 @@
+'use client';
+
+import React, { useState } from 'react';
 import NewsBar from '../components/newsBar'
 
-const currentYear = new Date().getFullYear();
-
 export default function Home() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const currentYear = new Date().getFullYear();
+
   return (
     <>
       <NewsBar />
 
       {/* ── NAV ── */}
       <nav>
-        <div className="nav-logo"><em>Max Dance</em> presenta La Pecora Nera</div>
-        <ul className="nav-links">
-          <li><a href="#danza">Danza</a></li>
-          <li><a href="#attivita">Attività</a></li>
-          <li><a href="#orari">Orari</a></li>
-          <li><a href="#dove">Dove Siamo</a></li>
-          <li><a href="#socio">Diventa Socio</a></li>
-          <li><a href="/admin" style={{ color: 'var(--oro)', opacity: 1 }}>Admin</a></li>
+      <div className="nav-logo">
+        <em>Max Dance</em> presenta 
+        <br className="mobile-break" /> {/* This is the magic line for breaking neatly on smaller screens */}
+        La Pecora Nera
+      </div>
+        
+        {/* Mobile Toggle Button */}
+        <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? '✕' : '☰'}
+        </button>
+
+        <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
+          <li><a href="#danza" onClick={() => setMenuOpen(false)}>Danza</a></li>
+          <li><a href="#attivita" onClick={() => setMenuOpen(false)}>Attività</a></li>
+          <li><a href="#orari" onClick={() => setMenuOpen(false)}>Orari</a></li>
+          <li><a href="#dove" onClick={() => setMenuOpen(false)}>Dove Siamo</a></li>
+          <li><a href="#socio" onClick={() => setMenuOpen(false)}>Diventa Socio</a></li>
+          <li><a href="/admin" onClick={() => setMenuOpen(false)} className="admin">Admin</a></li>
         </ul>
       </nav>
 
@@ -171,8 +185,8 @@ export default function Home() {
               </tr>
             </tbody>
           </table>
-          <p style={{ marginTop: '1.5rem', fontSize: '.82rem', color: 'var(--grigio)' }}>
-            * Tutte le serate sono seguite da un pasto caldo e vino locale, riservati ai soci del circolo.
+          <p className="riservato">
+            * Attività, pasti e bibite, riservati ai soli soci del circolo.
           </p>
         </div>
       </section>

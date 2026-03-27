@@ -9,7 +9,7 @@ export async function GET() {
       FROM announcements
       WHERE active = true
       ORDER BY created_at DESC
-      LIMIT 10
+      LIMIT 3
     `;
 
     return Response.json(announcements);

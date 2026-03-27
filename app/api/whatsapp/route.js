@@ -59,8 +59,14 @@ export async function POST(request) {
     // ── LIST command ──
     if (cmd === 'LIST') {
       const rows = await sql`
-        SELECT id, message, active FROM announcements ORDER BY created_at DESC LIMIT 10
-      `
+        SELECT 
+          id, 
+          message, 
+          active, 
+          TO_CHAR(created_at, 'DD/MM/YY HH24:MI') as formatted_date
+        FROM announcements 
+        ORDER BY created_at DESC 
+    `
       if (rows.length === 0) {
         await sendReply(from, '📋 Nessun annuncio nel database.')
       } else {
@@ -85,8 +91,8 @@ export async function POST(request) {
     // ── Default: store as new announcement ──
     const senderName = from.replace('whatsapp:', '')
     await sql`
-      INSERT INTO announcements (message, "from", active, created_at)
-      VALUES (${body}, ${senderName}, true, CURRENT_DATE)
+      INSERT INTO announcements (message, "from", active)
+      VALUES (${body}, ${senderName}, true)
     `
     await sendReply(from, `✅ Annuncio pubblicato!\n\n"${body}"\n\nInvia LIST per vedere tutti gli annunci o DELETE <id> per rimuoverne uno.`)
 
