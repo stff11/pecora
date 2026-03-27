@@ -138,6 +138,29 @@ footer { background: #0e0806; color: rgba(245,237,224,.45); text-align: center; 
 footer a { color: var(--oro); text-decoration: none; opacity: .7; }
 footer a:hover { opacity: 1; }
 
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  z-index: 9999;
+}
+
+.whatsapp-float:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+  background-color: #20ba5a;
+}
+
 /* ── ANIMATIONS ── */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 .fade-in { opacity: 0; transform: translateY(20px); transition: opacity .6s ease, transform .6s ease; }
