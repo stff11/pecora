@@ -232,14 +232,9 @@ export default function Home() {
 
       {/* ── FOOTER ── */}
       <footer>
-  <p>Max Dance presenta La Pecora Nera – Porto Torres</p>
-  <p>&copy; <span id="year"></span></p>
-</footer>
-
-<script>
-  const yearElement = document.getElementById("year");
-  yearElement.textContent = `${currentYear}`;
-</script>
+        <p>Max Dance presenta La Pecora Nera – Porto Torres</p>
+        <p>© {currentYear}</p>
+      </footer>
     </>
   )
 }

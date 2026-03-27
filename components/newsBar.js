@@ -24,10 +24,6 @@ export default function NewsBar() {
   }, [])
 
   const defaults = [
-    'Martedì & Giovedì – Danza Sudamericana con Max & Angelika',
-    'Mercoledì – Torneo di Boccette con Davide & Gianluca',
-    'Sabato – Scacchi con Sarah & Fabio',
-    'Porto Torres · Via Lussu · Circolo La Pecora Nera',
     'Chiusi la Domenica',
   ]
 
