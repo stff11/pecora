@@ -10,7 +10,7 @@ export default function NewsBar() {
   useEffect(() => {
     async function load() {
       try {
-        const res  = await fetch('/api/announcements', { next: { revalidate: 60 } })
+        const res = await fetch('/api/announcements', { cache: 'no-store' })
         const data = await res.json()
         if (data.length > 0) setMessages(data)
       } catch {
